@@ -11,7 +11,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      CARGO_INCREMENTAL: 1
       RUSTC_WRAPPER: sccache
       SCCACHE_CACHE_SIZE: 2G
       SCCACHE_DIR: /home/runner/.cache/sccache
@@ -38,6 +37,8 @@ jobs:
         run: sccache --start-server
       - name: Build binary
         run: cargo build --release
+        env:
+          CARGO_INCREMENTAL: 1
       - name: Print sccache stats
         run: sccache --show-stats
       - name: Stop sccache server
