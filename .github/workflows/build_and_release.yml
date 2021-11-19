@@ -40,6 +40,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: --all-features
+      - name: Run tests
+        run: cargo test --release
       - name: Build binary
         run: cargo build --release
         env:
