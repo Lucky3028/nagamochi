@@ -35,6 +35,11 @@ jobs:
           restore-keys: ${{ runner.os }}-sccache-
       - name: Start sccache server
         run: sccache --start-server
+      - name: Run Clippy
+        uses: actions-rs/clippy-check@v1.0.7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --all-features
       - name: Build binary
         run: cargo build --release
         env:
