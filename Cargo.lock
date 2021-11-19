@@ -5,3 +5,12 @@ version = 3
 [[package]]
 name = "nagamochi"
 version = "0.1.0"
+dependencies = [
+ "seahorse",
+]
+
+[[package]]
+name = "seahorse"
+version = "1.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8bee1fe454786f1d236a07cb3d3adcbaca96e9ba42d23bc58de059937bb059bd"
