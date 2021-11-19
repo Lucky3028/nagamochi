@@ -45,7 +45,7 @@ jobs:
       - name: Build binary
         run: cargo build --release
         env:
-          CARGO_INCREMENTAL: 1
+          CARGO_INCREMENTAL: 0
       - name: Print sccache stats
         run: sccache --show-stats
       - name: Stop sccache server
