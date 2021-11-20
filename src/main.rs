@@ -1,6 +1,5 @@
 use notify_rust::Notification;
 use seahorse::{App, Context};
-
 use std::{env, path::PathBuf, time};
 
 fn main() {

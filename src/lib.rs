@@ -13,12 +13,10 @@ pub fn read_capacity(path: std::path::PathBuf) -> anyhow::Result<u8> {
 
 #[cfg(test)]
 mod test {
+    use super::*;
     use std::{io::Write, path::Path};
-
     use tempfile::NamedTempFile;
     use test_case::test_case;
-
-    use super::*;
 
     #[test_case("0" => true)]
     #[test_case("30" => true)]
