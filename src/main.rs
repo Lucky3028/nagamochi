@@ -17,9 +17,9 @@ fn main() {
 
 fn default_action(_: &Context) {
     loop {
-        let p = PathBuf::from("/sys/class/power_supply/").join("BAT1/capacity");
-        let ss = nagamochi::read_capacity(p).unwrap();
-        Notification::new().summary(&format!("{}", ss)).show();
+        let path = PathBuf::from("/sys/class/power_supply/").join("BAT1/capacity");
+        let capa = nagamochi::read_capacity(path).unwrap();
+        Notification::new().summary(&format!("{}", capa)).show();
         std::thread::sleep(time::Duration::from_secs(3));
     }
 }
