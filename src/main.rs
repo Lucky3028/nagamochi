@@ -1,7 +1,7 @@
-use seahorse::{App, Context};
 use notify_rust::Notification;
+use seahorse::{App, Context};
 
-use std::{env, time, path::PathBuf};
+use std::{env, path::PathBuf, time};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
