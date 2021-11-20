@@ -9,7 +9,7 @@ fn main() {
         .description(env!("CARGO_PKG_DESCRIPTION"))
         .author(env!("CARGO_PKG_AUTHORS"))
         .version(env!("CARGO_PKG_VERSION"))
-        .usage("nagamochi [args]")
+        .usage("nagamochi")
         .action(default_action);
 
     app.run(args);
