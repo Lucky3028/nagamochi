@@ -37,8 +37,11 @@ jobs:
       - name: Start sccache server
         run: sccache --start-server
 
-      - name: Run clippy
-        run: cargo clippy --all-features --release
+      - name: Run Clippy
+        uses: actions-rs/clippy-check@v1.0.7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --all-features
       - name: Run formatter
         run: cargo fmt --all -- --check --release
       - name: Run tests
