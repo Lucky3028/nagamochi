@@ -18,7 +18,9 @@ fn default_action(_: &Context) {
     loop {
         let path = PathBuf::from("/sys/class/power_supply/").join("BAT1/capacity");
         let capa = nagamochi::read_capacity(path).unwrap();
-        Notification::new().summary(&format!("{}", capa)).show();
+        if let Err(e) = Notification::new().summary(&format!("{}", capa)).show() {
+            eprintln!("Error: Failed to send a notification: {}", e);
+        }
         std::thread::sleep(time::Duration::from_secs(3));
     }
 }
