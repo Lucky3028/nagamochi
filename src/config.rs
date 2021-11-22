@@ -10,7 +10,7 @@ enum TriggerType {
 
 #[derive(Deserialize, Serialize, Debug, PartialEq)]
 struct Trigger {
-    percentage: Option<u8>,
+    percentage: u8,
     when: TriggerType,
     message: String,
 }
@@ -35,17 +35,17 @@ impl Default for Config {
             check_interval: 60,
             triggers: vec![
                 Trigger {
-                    percentage: Some(100),
+                    percentage: 100,
                     when: TriggerType::Equal,
                     message: String::from("Battery Full"),
                 },
                 Trigger {
-                    percentage: Some(80),
+                    percentage: 80,
                     when: TriggerType::Above,
                     message: String::from("Battery Upper Limit"),
                 },
                 Trigger {
-                    percentage: Some(20),
+                    percentage: 20,
                     when: TriggerType::Below,
                     message: String::from("Battery Lower Limit"),
                 },
@@ -67,17 +67,17 @@ mod test {
             triggers: vec![
                 Trigger {
                     message: "qwerty".to_string(),
-                    percentage: Some(20),
+                    percentage: 20,
                     when: TriggerType::Equal,
                 },
                 Trigger {
                     message: "qwerty".to_string(),
-                    percentage: Some(10),
+                    percentage: 10,
                     when: TriggerType::Above,
                 },
                 Trigger {
                     message: "qwerty".to_string(),
-                    percentage: Some(80),
+                    percentage: 80,
                     when: TriggerType::Below,
                 },
             ],
