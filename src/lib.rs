@@ -1,5 +1,8 @@
 use std::fs;
 
+mod config;
+pub use config::Config;
+
 pub fn read_capacity(path: std::path::PathBuf) -> anyhow::Result<u8> {
     let capa: u8 = fs::read_to_string(path)?
         .lines()
@@ -32,9 +35,7 @@ mod test {
         };
         let path = temp_file.into_parts().1;
         let path: &Path = path.as_ref();
-
         let res = read_capacity(path.to_path_buf());
-        println!("{:?}", res);
 
         res.is_ok()
     }
