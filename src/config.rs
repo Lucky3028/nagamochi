@@ -9,7 +9,7 @@ enum TriggerType {
 }
 
 #[derive(Deserialize, Serialize, Debug, PartialEq)]
-struct Trigger {
+pub struct Trigger {
     percentage: u8,
     when: TriggerType,
     message: String,
@@ -17,8 +17,8 @@ struct Trigger {
 
 #[derive(Deserialize, Serialize, Debug, PartialEq)]
 pub struct Config {
-    check_interval: u64,
-    triggers: Vec<Trigger>,
+    pub check_interval: u64,
+    pub triggers: Vec<Trigger>,
 }
 
 impl Config {
