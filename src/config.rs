@@ -72,6 +72,7 @@ mod test {
         };
         let path = Path::new("./src/tests/configs/general_config.yml");
         let res = Config::from_file(path).unwrap();
+
         assert_eq!(res, expected_config);
     }
 
@@ -79,6 +80,7 @@ mod test {
     fn bad_config() {
         let path = Path::new("./src/tests/configs/bad_config.yml");
         let res = Config::from_file(path);
+
         assert!(res.is_err());
     }
 }
