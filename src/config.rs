@@ -12,7 +12,17 @@ enum TriggerType {
 pub struct Trigger {
     percentage: u8,
     when: TriggerType,
-    message: String,
+    pub message: String,
+}
+
+impl Trigger {
+    pub fn is_fired(&self, capacity: u8) -> bool {
+        match self.when {
+            TriggerType::Above => self.percentage <= capacity,
+            TriggerType::Below => self.percentage >= capacity,
+            TriggerType::Equal => self.percentage == capacity
+        }
+    }
 }
 
 #[derive(Deserialize, Serialize, Debug, PartialEq)]
