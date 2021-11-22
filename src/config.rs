@@ -6,8 +6,6 @@ enum TriggerType {
     Above,
     Below,
     Equal,
-    Charging,
-    Discharging,
 }
 
 #[derive(Deserialize, Serialize, Debug, PartialEq)]
@@ -26,21 +24,8 @@ pub struct Config {
 impl Config {
     pub fn from_file(path: &Path) -> anyhow::Result<Self> {
         let str = fs::read_to_string(path)?;
-        let config: Self = serde_yaml::from_str(&str)?;
-        let triggers: Vec<Trigger> = config
-            .triggers
-            .into_iter()
-            .map(|trigger| Trigger {
-                percentage: match trigger.when {
-                    TriggerType::Charging | TriggerType::Discharging => None,
-                    _ => trigger.percentage,
-                },
-                ..trigger
-            })
-            .collect();
-        let config = Self { triggers, ..config };
 
-        Ok(config)
+        Ok(serde_yaml::from_str::<Self>(&str)?)
     }
 }
 
@@ -63,16 +48,6 @@ impl Default for Config {
                     percentage: Some(20),
                     when: TriggerType::Below,
                     message: String::from("Battery Lower Limit"),
-                },
-                Trigger {
-                    percentage: None,
-                    when: TriggerType::Charging,
-                    message: String::from("Plugged"),
-                },
-                Trigger {
-                    percentage: None,
-                    when: TriggerType::Discharging,
-                    message: String::from("Unplugged"),
                 },
             ],
         }
@@ -108,28 +83,6 @@ mod test {
             ],
         };
         let path = Path::new("./src/tests/configs/general_config.yml");
-        let res = Config::from_file(path).unwrap();
-        assert_eq!(res, expected_config);
-    }
-
-    #[test]
-    fn mapped_config() {
-        let expected_config = Config {
-            check_interval: 60,
-            triggers: vec![
-                Trigger {
-                    message: "qwerty".to_string(),
-                    percentage: None,
-                    when: TriggerType::Charging,
-                },
-                Trigger {
-                    message: "qwerty".to_string(),
-                    percentage: None,
-                    when: TriggerType::Discharging,
-                },
-            ],
-        };
-        let path = Path::new("./src/tests/configs/mapped_config.yml");
         let res = Config::from_file(path).unwrap();
         assert_eq!(res, expected_config);
     }
