@@ -31,22 +31,3 @@ fn default_action(_: &Context) {
         std::thread::sleep(time::Duration::from_secs(config.check_interval));
     }
 }
-
-fn find_config() -> anyhow::Result<Config> {
-    env::var_os("HOME")
-        .map(find_config_path)
-        .map_or(anyhow::anyhow!("config not found"), |path| {
-            Config::from_file(&path.unwrap())
-        })
-}
-
-fn find_config_path(home_dir: std::ffi::OsString) -> Option<PathBuf> {
-    vec![
-        format!("{:?}/.config/nagamochi/nagamochi.yml", home_dir),
-        format!("{:?}/nagamochi.yml", home_dir),
-        "./nagamochi.yml".to_string(),
-    ]
-    .iter()
-    .map(PathBuf::from)
-    .find(|path| path.exists())
-}

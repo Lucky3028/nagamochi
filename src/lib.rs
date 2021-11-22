@@ -1,7 +1,26 @@
-use std::fs;
+use std::{env, fs, path::PathBuf};
 
 mod config;
 pub use config::Config;
+
+pub fn find_config() -> anyhow::Result<Config> {
+    env::var_os("HOME")
+        .map(find_config_path)
+        .map_or(Err(anyhow::anyhow!("config not found")), |path| {
+            Config::from_file(&path.unwrap())
+        })
+}
+
+pub fn find_config_path(home_dir: std::ffi::OsString) -> Option<PathBuf> {
+    vec![
+        format!("{:?}/.config/nagamochi/nagamochi.yml", home_dir),
+        format!("{:?}/nagamochi.yml", home_dir),
+        "./nagamochi.yml".to_string(),
+    ]
+    .iter()
+    .map(PathBuf::from)
+    .find(|path| path.exists())
+}
 
 pub fn read_capacity(path: std::path::PathBuf) -> anyhow::Result<u8> {
     let capa: u8 = fs::read_to_string(path)?
