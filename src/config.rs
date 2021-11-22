@@ -26,16 +26,19 @@ impl Default for Config {
                     percentage: 100,
                     when: TriggerType::Equal,
                     message: String::from("Battery Full"),
+                    can_suppress: true
                 },
                 Trigger {
                     percentage: 80,
                     when: TriggerType::Above,
                     message: String::from("Battery Upper Limit"),
+                    can_suppress: true,
                 },
                 Trigger {
                     percentage: 20,
                     when: TriggerType::Below,
                     message: String::from("Battery Lower Limit"),
+                    can_suppress: true
                 },
             ],
         }
@@ -57,16 +60,19 @@ mod test {
                     message: "qwerty".to_string(),
                     percentage: 20,
                     when: TriggerType::Equal,
+                    can_suppress: true,
                 },
                 Trigger {
                     message: "qwerty".to_string(),
                     percentage: 10,
                     when: TriggerType::Above,
+                    can_suppress: true,
                 },
                 Trigger {
                     message: "qwerty".to_string(),
                     percentage: 80,
                     when: TriggerType::Below,
+                    can_suppress: true,
                 },
             ],
         };
