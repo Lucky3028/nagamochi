@@ -55,8 +55,7 @@ mod test {
         };
         let path = temp_file.into_parts().1;
         let path: &Path = path.as_ref();
-        let res = read_capacity(path.to_path_buf());
 
-        res.is_ok()
+        read_capacity(path.to_path_buf()).is_ok()
     }
 }
