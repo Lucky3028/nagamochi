@@ -17,13 +17,10 @@ fn main() {
 
 fn default_action(_: &Context) {
     loop {
-        let config = match find_config() {
-            Ok(config) => config,
-            Err(e) => {
-                eprintln!("{:?}", e);
-                Config::default()
-            }
-        };
+        let config = nagamochi::find_config().unwrap_or_else(|e| {
+            eprintln!("{:?}", e);
+            Config::default()
+        });
         let path = PathBuf::from("/sys/class/power_supply/").join("BAT1/capacity");
         let capa = nagamochi::read_capacity(path).unwrap();
         config.triggers.iter().filter(|trigger| trigger.is_fired(capa)).for_each(|trigger| {
