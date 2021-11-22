@@ -1,6 +1,5 @@
 use serde::{Deserialize, Serialize};
 use std::{cmp::PartialEq, fmt::Debug, fs, path::Path};
-
 use super::trigger::{Trigger, TriggerType};
 
 #[derive(Deserialize, Serialize, Debug, PartialEq)]
