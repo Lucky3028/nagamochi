@@ -57,21 +57,21 @@ mod test {
             check_interval: 60,
             triggers: vec![
                 Trigger {
-                    message: "qwerty".to_string(),
                     percentage: 20,
                     when: TriggerType::Equal,
+                    message: "qwerty".to_string(),
                     can_suppress: true,
                 },
                 Trigger {
-                    message: "qwerty".to_string(),
                     percentage: 10,
                     when: TriggerType::Above,
+                    message: "qwerty".to_string(),
                     can_suppress: true,
                 },
                 Trigger {
-                    message: "qwerty".to_string(),
                     percentage: 80,
                     when: TriggerType::Below,
+                    message: "qwerty".to_string(),
                     can_suppress: true,
                 },
             ],
