@@ -17,7 +17,7 @@ struct Trigger {
 
 #[derive(Deserialize, Serialize, Debug, PartialEq)]
 pub struct Config {
-    check_interval: i32,
+    check_interval: u64,
     triggers: Vec<Trigger>,
 }
 
