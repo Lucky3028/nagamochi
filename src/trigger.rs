@@ -39,12 +39,11 @@ mod test {
     #[test_case(TriggerType::Equal, 20, 20 => true)]
     #[test_case(TriggerType::Equal, 20, 30 => false)]
     fn trigger_is_fired(when: TriggerType, percentage: u8, capa: u8) -> bool {
-        let trigger = Trigger {
+        Trigger {
             percentage,
             when,
             message: "".to_string(),
-        };
-
-        trigger.is_fired(capa)
+        }
+        .is_fired(capa)
     }
 }
