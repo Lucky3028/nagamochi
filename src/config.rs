@@ -1,29 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::{cmp::PartialEq, fmt::Debug, fs, path::Path};
 
-#[derive(Deserialize, PartialEq, Serialize, Debug)]
-enum TriggerType {
-    Above,
-    Below,
-    Equal,
-}
-
-#[derive(Deserialize, Serialize, Debug, PartialEq)]
-pub struct Trigger {
-    percentage: u8,
-    when: TriggerType,
-    pub message: String,
-}
-
-impl Trigger {
-    pub fn is_fired(&self, capacity: u8) -> bool {
-        match self.when {
-            TriggerType::Above => self.percentage <= capacity,
-            TriggerType::Below => self.percentage >= capacity,
-            TriggerType::Equal => self.percentage == capacity
-        }
-    }
-}
+use super::trigger::{Trigger, TriggerType};
 
 #[derive(Deserialize, Serialize, Debug, PartialEq)]
 pub struct Config {

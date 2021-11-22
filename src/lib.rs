@@ -2,6 +2,7 @@ use std::{env, fs, path::PathBuf};
 
 mod config;
 pub use config::Config;
+pub mod trigger;
 
 pub fn find_config() -> anyhow::Result<Config> {
     env::var_os("HOME")
