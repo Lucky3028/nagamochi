@@ -1,0 +1,12 @@
+triggers: [
+  {
+    message: 0,
+    percentage: 20,
+    when: "BAD"
+  },
+  {
+    message: "qwerty",
+    percentage: "EVIL",
+    when: "DUMMY"
+  }
+]

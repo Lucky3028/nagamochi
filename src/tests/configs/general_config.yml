@@ -1,0 +1,18 @@
+check_interval: 60
+triggers: [
+  {
+    message: "qwerty",
+    percentage: 20,
+    when: "Equal"
+  },
+  {
+    message: "qwerty",
+    percentage: 10,
+    when: "Above"
+  },
+  {
+    message: "qwerty",
+    percentage: 80,
+    when: "Below"
+  }
+]

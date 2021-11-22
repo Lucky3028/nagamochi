@@ -79,3 +79,65 @@ impl Default for Config {
     }
 }
 
+#[cfg(test)]
+mod test {
+    use super::*;
+    use pretty_assertions::assert_eq;
+    use std::path::Path;
+
+    #[test]
+    fn general_config() {
+        let expected_config = Config {
+            check_interval: 60,
+            triggers: vec![
+                Trigger {
+                    message: "qwerty".to_string(),
+                    percentage: Some(20),
+                    when: TriggerType::Equal,
+                },
+                Trigger {
+                    message: "qwerty".to_string(),
+                    percentage: Some(10),
+                    when: TriggerType::Above,
+                },
+                Trigger {
+                    message: "qwerty".to_string(),
+                    percentage: Some(80),
+                    when: TriggerType::Below,
+                },
+            ],
+        };
+        let path = Path::new("./src/tests/configs/general_config.yml");
+        let res = Config::from_file(path).unwrap();
+        assert_eq!(res, expected_config);
+    }
+
+    #[test]
+    fn mapped_config() {
+        let expected_config = Config {
+            check_interval: 60,
+            triggers: vec![
+                Trigger {
+                    message: "qwerty".to_string(),
+                    percentage: None,
+                    when: TriggerType::Charging,
+                },
+                Trigger {
+                    message: "qwerty".to_string(),
+                    percentage: None,
+                    when: TriggerType::Discharging,
+                },
+            ],
+        };
+        let path = Path::new("./src/tests/configs/mapped_config.yml");
+        let res = Config::from_file(path).unwrap();
+        assert_eq!(res, expected_config);
+    }
+
+    #[test]
+    fn bad_config() {
+        let path = Path::new("./src/tests/configs/bad_config.yml");
+        let res = Config::from_file(path);
+        assert!(res.is_err());
+    }
+}
