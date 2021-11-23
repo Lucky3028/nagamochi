@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::{cmp::PartialEq, fmt::Debug};
+use super::suppressor::Suppressor;
 
 #[derive(Deserialize, PartialEq, Serialize, Debug)]
 pub enum TriggerType {
@@ -13,6 +14,7 @@ pub struct Trigger {
     pub percentage: u8,
     pub when: TriggerType,
     pub message: String,
+    pub suppressors: Vec<Suppressor>,
 }
 
 impl Trigger {
@@ -43,6 +45,7 @@ mod test {
             percentage,
             when,
             message: "".to_string(),
+            suppressors: vec![],
         }
         .is_fired(capa)
     }

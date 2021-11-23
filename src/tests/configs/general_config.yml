@@ -4,15 +4,18 @@ triggers: [
     message: "qwerty",
     percentage: 20,
     when: "Equal",
+    suppressors: [],
   },
   {
     message: "qwerty",
     percentage: 10,
     when: "Above",
+    suppressors: [],
   },
   {
     message: "qwerty",
     percentage: 80,
     when: "Below",
+    suppressors: [],
   }
 ]

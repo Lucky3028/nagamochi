@@ -27,6 +27,15 @@ fn default_action(_: &Context) {
             .triggers
             .iter()
             .filter(|trigger| trigger.is_fired(capa))
+            .filter(|trigger| {
+                let is_ac =
+                    nagamochi::is_ac_connected(PathBuf::from("/sys/class/power_supply/ACAD"))
+                        .unwrap_or_else(|e| {
+                            eprintln!("{:?}", e);
+                            false
+                        });
+                trigger.suppressors.iter().any(|sup| sup.is_enabled(is_ac))
+            })
             .for_each(|trigger| {
                 if let Err(e) = Notification::new()
                     .summary("nagamochi")

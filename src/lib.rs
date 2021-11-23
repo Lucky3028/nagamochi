@@ -2,7 +2,9 @@ use std::{env, fs, path::PathBuf};
 
 mod config;
 pub use config::Config;
-pub mod trigger;
+mod trigger;
+mod suppressor;
+pub use suppressor::Suppressor;
 
 pub fn find_config() -> anyhow::Result<Config> {
     env::var_os("HOME")

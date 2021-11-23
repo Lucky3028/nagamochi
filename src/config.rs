@@ -25,16 +25,19 @@ impl Default for Config {
                     percentage: 100,
                     when: TriggerType::Equal,
                     message: String::from("Battery Full"),
+                    suppressors: vec![],
                 },
                 Trigger {
                     percentage: 80,
                     when: TriggerType::Above,
                     message: String::from("Battery Upper Limit"),
+                    suppressors: vec![],
                 },
                 Trigger {
                     percentage: 20,
                     when: TriggerType::Below,
                     message: String::from("Battery Lower Limit"),
+                    suppressors: vec![],
                 },
             ],
         }
@@ -56,16 +59,19 @@ mod test {
                     percentage: 20,
                     when: TriggerType::Equal,
                     message: "qwerty".to_string(),
+                    suppressors: vec![],
                 },
                 Trigger {
                     percentage: 10,
                     when: TriggerType::Above,
                     message: "qwerty".to_string(),
+                    suppressors: vec![],
                 },
                 Trigger {
                     percentage: 80,
                     when: TriggerType::Below,
                     message: "qwerty".to_string(),
+                    suppressors: vec![],
                 },
             ],
         };
