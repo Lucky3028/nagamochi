@@ -21,6 +21,7 @@ fn default_action(_: &Context) {
             eprintln!("{:?}", e);
             Config::default()
         });
+        // TODO: BAT0の場合などにも対応する
         let path = PathBuf::from("/sys/class/power_supply/").join("BAT1/capacity");
         let capa = nagamochi::read_capacity(path).unwrap();
         config
