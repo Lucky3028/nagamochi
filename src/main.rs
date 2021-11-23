@@ -34,7 +34,7 @@ fn default_action(_: &Context) {
                             eprintln!("{:?}", e);
                             false
                         });
-                trigger.suppressors.iter().any(|sup| sup.is_enabled(is_ac))
+                trigger.suppressors.iter().any(|sup| !sup.is_enabled(is_ac))
             })
             .for_each(|trigger| {
                 if let Err(e) = Notification::new()
