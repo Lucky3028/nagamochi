@@ -1,6 +1,6 @@
+use super::suppressor::Suppressor;
 use serde::{Deserialize, Serialize};
 use std::{cmp::PartialEq, fmt::Debug};
-use super::suppressor::Suppressor;
 
 #[derive(Deserialize, PartialEq, Serialize, Debug)]
 pub enum TriggerType {

@@ -2,8 +2,8 @@ use std::{env, fs, path::PathBuf};
 
 mod config;
 pub use config::Config;
-mod trigger;
 mod suppressor;
+mod trigger;
 pub use suppressor::Suppressor;
 
 pub fn find_config() -> anyhow::Result<Config> {
