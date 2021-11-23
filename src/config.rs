@@ -1,6 +1,6 @@
+use super::trigger::{Trigger, TriggerType};
 use serde::{Deserialize, Serialize};
 use std::{cmp::PartialEq, fmt::Debug, fs, path::Path};
-use super::trigger::{Trigger, TriggerType};
 
 #[derive(Deserialize, Serialize, Debug, PartialEq)]
 pub struct Config {
@@ -25,7 +25,7 @@ impl Default for Config {
                     percentage: 100,
                     when: TriggerType::Equal,
                     message: String::from("Battery Full"),
-                    can_suppress: true
+                    can_suppress: true,
                 },
                 Trigger {
                     percentage: 80,
@@ -37,7 +37,7 @@ impl Default for Config {
                     percentage: 20,
                     when: TriggerType::Below,
                     message: String::from("Battery Lower Limit"),
-                    can_suppress: true
+                    can_suppress: true,
                 },
             ],
         }
