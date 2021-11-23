@@ -41,7 +41,7 @@ pub fn read_ac_status(path: std::path::PathBuf) -> anyhow::Result<bool> {
         .unwrap_or_default()
         .parse()?;
 
-    Ok(status % 2 == 0)
+    Ok(status % 2 == 1)
 }
 
 #[cfg(test)]
