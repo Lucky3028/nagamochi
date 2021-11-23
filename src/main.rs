@@ -23,11 +23,19 @@ fn default_action(_: &Context) {
         });
         let path = PathBuf::from("/sys/class/power_supply/").join("BAT1/capacity");
         let capa = nagamochi::read_capacity(path).unwrap();
-        config.triggers.iter().filter(|trigger| trigger.is_fired(capa)).for_each(|trigger| {
-            if let Err(e) = Notification::new().summary("nagamochi").body(&trigger.message).show() {
-                eprintln!("Error: Failed to send a notification: {}", e);
-            }
-        });
+        config
+            .triggers
+            .iter()
+            .filter(|trigger| trigger.is_fired(capa))
+            .for_each(|trigger| {
+                if let Err(e) = Notification::new()
+                    .summary("nagamochi")
+                    .body(&trigger.message)
+                    .show()
+                {
+                    eprintln!("Error: Failed to send a notification: {}", e);
+                }
+            });
         std::thread::sleep(time::Duration::from_secs(config.check_interval));
     }
 }
