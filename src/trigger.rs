@@ -13,7 +13,6 @@ pub struct Trigger {
     pub percentage: u8,
     pub when: TriggerType,
     pub message: String,
-    pub can_suppress: bool,
 }
 
 impl Trigger {
@@ -43,7 +42,6 @@ mod test {
         Trigger {
             percentage,
             when,
-            can_suppress: false,
             message: "".to_string(),
         }
         .is_fired(capa)

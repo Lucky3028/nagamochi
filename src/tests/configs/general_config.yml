@@ -4,18 +4,15 @@ triggers: [
     message: "qwerty",
     percentage: 20,
     when: "Equal",
-    can_suppress: true
   },
   {
     message: "qwerty",
     percentage: 10,
     when: "Above",
-    can_suppress: true
   },
   {
     message: "qwerty",
     percentage: 80,
     when: "Below",
-    can_suppress: true
   }
 ]

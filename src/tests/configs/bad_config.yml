@@ -3,7 +3,6 @@ triggers: [
     message: 0,
     percentage: 20,
     when: "BAD",
-    can_suppress: ["array"]
   },
   {
     message: "qwerty",
