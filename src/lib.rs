@@ -34,6 +34,16 @@ pub fn read_capacity(path: std::path::PathBuf) -> anyhow::Result<u8> {
     Ok(capa)
 }
 
+pub fn read_ac_status(path: std::path::PathBuf) -> anyhow::Result<bool> {
+    let status: u8 = fs::read_to_string(path)?
+        .lines()
+        .next()
+        .unwrap_or_default()
+        .parse()?;
+
+    Ok(status % 2 == 0)
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
