@@ -38,6 +38,7 @@ fn default_action(_: &Context) {
                 trigger.suppressors.iter().any(|sup| !sup.is_enabled(is_ac))
             })
             .for_each(|trigger| {
+                // TODO: 音を鳴らす
                 if let Err(e) = Notification::new()
                     .summary("nagamochi")
                     .body(&trigger.message)
