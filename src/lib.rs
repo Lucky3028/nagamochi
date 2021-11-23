@@ -34,7 +34,7 @@ pub fn read_capacity(path: std::path::PathBuf) -> anyhow::Result<u8> {
     Ok(capa)
 }
 
-pub fn read_ac_status(path: std::path::PathBuf) -> anyhow::Result<bool> {
+pub fn is_ac_connected(path: std::path::PathBuf) -> anyhow::Result<bool> {
     let status: u8 = fs::read_to_string(path)?
         .lines()
         .next()
@@ -71,14 +71,14 @@ mod test {
 
     #[test_case(0 => false)]
     #[test_case(1 => true)]
-    fn test_read_ac_status(content: u8) -> bool {
+    fn test_is_ac_connected(content: u8) -> bool {
         let mut temp_file = NamedTempFile::new().unwrap();
         if let Err(e) = write!(temp_file, "{}", content) {
             panic!("Error: Failed to create temp file while testing: {:?}", e);
         };
         let path = temp_file.into_parts().1;
         let path: &Path = path.as_ref();
-        let res = read_ac_status(path.to_path_buf());
+        let res = is_ac_connected(path.to_path_buf());
 
         res.is_ok() && res.unwrap()
     }
