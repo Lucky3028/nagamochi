@@ -68,4 +68,18 @@ mod test {
 
         read_capacity(path.to_path_buf()).is_ok()
     }
+
+    #[test_case(0 => false)]
+    #[test_case(1 => true)]
+    fn test_read_ac_status(content: u8) -> bool {
+        let mut temp_file = NamedTempFile::new().unwrap();
+        if let Err(e) = write!(temp_file, "{}", content) {
+            panic!("Error: Failed to create temp file while testing: {:?}", e);
+        };
+        let path = temp_file.into_parts().1;
+        let path: &Path = path.as_ref();
+        let res = read_ac_status(path.to_path_buf());
+
+        res.is_ok() && res.unwrap()
+    }
 }
