@@ -1,7 +1,12 @@
 use nagamochi::Config;
 use notify_rust::Notification;
 use seahorse::{App, Context};
-use std::{env, path::PathBuf, time};
+use soloud::{audio, AudioExt, LoadExt, Soloud};
+use std::{
+    env,
+    path::{Path, PathBuf},
+    time,
+};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -38,13 +43,21 @@ fn default_action(_: &Context) {
                 trigger.suppressors.iter().any(|sup| !sup.is_enabled(is_ac))
             })
             .for_each(|trigger| {
-                // TODO: 音を鳴らす
                 if let Err(e) = Notification::new()
                     .summary("nagamochi")
                     .body(&trigger.message)
                     .show()
                 {
                     eprintln!("Error: Failed to send a notification: {}", e);
+                }
+
+                let sl = Soloud::default().unwrap();
+                let mut wav = audio::Wav::default();
+                wav.load(&Path::new("/usr/share/sounds/purple/receive.wav"))
+                    .unwrap();
+                sl.play(&wav);
+                while sl.voice_count() > 0 {
+                    std::thread::sleep(std::time::Duration::from_millis(100));
                 }
             });
         std::thread::sleep(time::Duration::from_secs(config.check_interval));
