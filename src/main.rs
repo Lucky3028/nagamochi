@@ -51,6 +51,8 @@ fn default_action(_: &Context) {
                     eprintln!("Error: Failed to send a notification: {}", e);
                 }
 
+                // TODO: unwrapを撲滅
+                // TODO: 音を鳴らすかどうかと音声ファイルの場所を設定できるように
                 let sl = Soloud::default().unwrap();
                 let mut wav = audio::Wav::default();
                 wav.load(&Path::new("/usr/share/sounds/purple/receive.wav"))
