@@ -1,4 +1,8 @@
-use std::{env, fs, path::PathBuf};
+use soloud::{audio, AudioExt, LoadExt, Soloud};
+use std::{
+    env, fs,
+    path::{Path, PathBuf},
+};
 
 mod config;
 pub use config::Config;
@@ -44,6 +48,21 @@ pub fn is_ac_connected(path: std::path::PathBuf) -> anyhow::Result<bool> {
         .parse()?;
 
     Ok(status % 2 == 1)
+}
+
+pub fn play_sound(path: &Path) -> anyhow::Result<()> {
+    anyhow::ensure!(path.exists(), "Audio file not found!");
+
+    let sound_player = Soloud::default()?;
+    // TODO: wavでもmp3でもどちらでもいいようにする
+    let mut wav = audio::Wav::default();
+    wav.load(path)?;
+    sound_player.play(&wav);
+    while sound_player.voice_count() > 0 {
+        std::thread::sleep(std::time::Duration::from_millis(100));
+    }
+
+    Ok(())
 }
 
 #[cfg(test)]

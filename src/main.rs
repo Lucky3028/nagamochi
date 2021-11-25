@@ -1,12 +1,7 @@
 use nagamochi::Config;
 use notify_rust::Notification;
 use seahorse::{App, Context};
-use soloud::{audio, AudioExt, LoadExt, Soloud};
-use std::{
-    env,
-    path::{Path, PathBuf},
-    time,
-};
+use std::{env, path::PathBuf, time};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -50,17 +45,7 @@ fn default_action(_: &Context) {
                 {
                     eprintln!("Error: Failed to send a notification: {}", e);
                 }
-
-                // TODO: unwrapを撲滅
-                // TODO: 音を鳴らすかどうかと音声ファイルの場所を設定できるように
-                let sl = Soloud::default().unwrap();
-                let mut wav = audio::Wav::default();
-                wav.load(&Path::new("/usr/share/sounds/purple/receive.wav"))
-                    .unwrap();
-                sl.play(&wav);
-                while sl.voice_count() > 0 {
-                    std::thread::sleep(std::time::Duration::from_millis(100));
-                }
+                let _ = nagamochi::play_sound(&PathBuf::from("/usr/share/sounds/purple/receive.wav"));
             });
         std::thread::sleep(time::Duration::from_secs(config.check_interval));
     }
