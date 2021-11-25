@@ -45,7 +45,7 @@ fn default_action(_: &Context) {
                 {
                     eprintln!("Error: Failed to send a notification: {}", e);
                 }
-                nagamochi::play_sound(&PathBuf::from("/usr/share/sounds/purple/receive.wav")).unwrap();
+                nagamochi::play_sound(&PathBuf::from("/usr/share/sounds/purple/receive.wav"));
             });
         std::thread::sleep(time::Duration::from_secs(config.check_interval));
     }
