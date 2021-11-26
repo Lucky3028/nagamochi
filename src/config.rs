@@ -25,19 +25,19 @@ impl Default for Config {
                     percentage: 100,
                     when: TriggerType::Equal,
                     message: String::from("Battery Full"),
-                    suppressors: vec![],
+                    ..Trigger::default()
                 },
                 Trigger {
                     percentage: 80,
                     when: TriggerType::Above,
                     message: String::from("Battery Upper Limit"),
-                    suppressors: vec![],
+                    ..Trigger::default()
                 },
                 Trigger {
                     percentage: 20,
                     when: TriggerType::Below,
                     message: String::from("Battery Lower Limit"),
-                    suppressors: vec![],
+                    ..Trigger::default()
                 },
             ],
         }
@@ -48,7 +48,7 @@ impl Default for Config {
 mod test {
     use super::*;
     use pretty_assertions::assert_eq;
-    use std::path::Path;
+    use std::path::{Path, PathBuf};
 
     #[test]
     fn general_config() {
@@ -58,20 +58,19 @@ mod test {
                 Trigger {
                     percentage: 20,
                     when: TriggerType::Equal,
-                    message: "qwerty".to_string(),
-                    suppressors: vec![],
+                    ..Trigger::default()
                 },
                 Trigger {
                     percentage: 10,
                     when: TriggerType::Above,
-                    message: "qwerty".to_string(),
-                    suppressors: vec![],
+                    ..Trigger::default()
                 },
                 Trigger {
                     percentage: 80,
                     when: TriggerType::Below,
                     message: "qwerty".to_string(),
                     suppressors: vec![],
+                    ..Trigger::default()
                 },
             ],
         };

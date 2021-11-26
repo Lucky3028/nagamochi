@@ -28,6 +28,18 @@ impl Trigger {
     }
 }
 
+impl Default for Trigger {
+    fn default() -> Self {
+        Trigger {
+            percentage: 20,
+            when: TriggerType::Equal,
+            message: "qwerty".to_string(),
+            suppressors: vec![],
+            sound_file: None,
+        }
+    }
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
@@ -45,8 +57,7 @@ mod test {
         Trigger {
             percentage,
             when,
-            message: "".to_string(),
-            suppressors: vec![],
+            ..Trigger::default()
         }
         .is_fired(capa)
     }
