@@ -19,7 +19,7 @@ pub struct Trigger {
     #[serde(
         with = "serde_helper",
         default = "default_sound_file",
-        skip_serializing_if = "Option::is_none",
+        skip_serializing_if = "Option::is_none"
     )]
     pub sound_file: Option<PathBuf>,
 }
