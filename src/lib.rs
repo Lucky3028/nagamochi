@@ -9,6 +9,7 @@ pub use config::Config;
 mod suppressor;
 pub use suppressor::Suppressor;
 mod trigger;
+mod serde_helper;
 
 pub fn find_config() -> anyhow::Result<Config> {
     env::var_os("HOME")

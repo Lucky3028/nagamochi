@@ -1,6 +1,6 @@
-use super::suppressor::Suppressor;
+use super::{serde_helper, suppressor::Suppressor};
 use serde::{Deserialize, Serialize};
-use std::{cmp::PartialEq, fmt::Debug};
+use std::{cmp::PartialEq, fmt::Debug, path::PathBuf};
 
 #[derive(Deserialize, PartialEq, Serialize, Debug)]
 pub enum TriggerType {
@@ -9,13 +9,24 @@ pub enum TriggerType {
     Equal,
 }
 
-// TODO: 音を鳴らすかどうかと音声ファイルの場所を設定できるように
+// TODO: 音を鳴らすかどうかを設定できるように
 #[derive(Deserialize, Serialize, Debug, PartialEq)]
 pub struct Trigger {
     pub percentage: u8,
     pub when: TriggerType,
     pub message: String,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub suppressors: Vec<Suppressor>,
+    #[serde(
+        with = "serde_helper",
+        skip_serializing_if = "Option::is_none",
+        default = "default_sound_file"
+    )]
+    pub sound_file: Option<PathBuf>,
+}
+
+fn default_sound_file() -> Option<PathBuf> {
+    None
 }
 
 impl Trigger {

@@ -17,5 +17,6 @@ triggers: [
     percentage: 80,
     when: "Below",
     suppressors: [],
+    sound_file: "/"
   }
 ]

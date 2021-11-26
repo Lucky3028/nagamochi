@@ -68,8 +68,7 @@ mod test {
                 Trigger {
                     percentage: 80,
                     when: TriggerType::Below,
-                    message: "qwerty".to_string(),
-                    suppressors: vec![],
+                    sound_file: Some(PathBuf::from("/")),
                     ..Trigger::default()
                 },
             ],
