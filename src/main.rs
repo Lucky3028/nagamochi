@@ -38,6 +38,11 @@ fn default_action(_: &Context) {
                 trigger.suppressors.iter().any(|sup| !sup.is_enabled(is_ac))
             })
             .for_each(|trigger| {
+                if let Some(path) = &trigger.sound_file {
+                    if let Err(e) = nagamochi::play_sound(path) {
+                        eprintln!("Error: Failed to play a sound: {}", e);
+                    }
+                }
                 if let Err(e) = Notification::new()
                     .summary("nagamochi")
                     .body(&trigger.message)
@@ -45,7 +50,6 @@ fn default_action(_: &Context) {
                 {
                     eprintln!("Error: Failed to send a notification: {}", e);
                 }
-                nagamochi::play_sound(&PathBuf::from("/usr/share/sounds/purple/receive.wav"));
             });
         std::thread::sleep(time::Duration::from_secs(config.check_interval));
     }

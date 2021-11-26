@@ -9,7 +9,6 @@ pub enum TriggerType {
     Equal,
 }
 
-// TODO: 音を鳴らすかどうかを設定できるように
 #[derive(Deserialize, Serialize, Debug, PartialEq)]
 pub struct Trigger {
     pub percentage: u8,
