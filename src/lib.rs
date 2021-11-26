@@ -54,7 +54,6 @@ pub fn play_sound(path: &Path) -> anyhow::Result<()> {
     anyhow::ensure!(path.exists(), "Audio file not found!");
 
     let sound_player = Soloud::default()?;
-    // TODO: wavでもmp3でもどちらでもいいようにする
     let mut wav = audio::Wav::default();
     wav.load(path)?;
     sound_player.play(&wav);
