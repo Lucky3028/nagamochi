@@ -8,8 +8,8 @@ mod config;
 pub use config::Config;
 mod suppressor;
 pub use suppressor::Suppressor;
-mod trigger;
 mod serde_helper;
+mod trigger;
 
 pub fn find_config() -> anyhow::Result<Config> {
     env::var_os("HOME")
