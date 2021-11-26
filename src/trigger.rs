@@ -18,8 +18,8 @@ pub struct Trigger {
     pub suppressors: Vec<Suppressor>,
     #[serde(
         with = "serde_helper",
+        default = "default_sound_file",
         skip_serializing_if = "Option::is_none",
-        default = "default_sound_file"
     )]
     pub sound_file: Option<PathBuf>,
 }
