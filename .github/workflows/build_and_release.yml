@@ -17,6 +17,16 @@ jobs:
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v1
 
+      - name: Build binary
+        run: cargo build --release
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache dependencies
+        uses: Swatinem/rust-cache@v1
+
       - name: Run Clippy
         uses: actions-rs/clippy-check@v1.0.7
         with:
@@ -24,7 +34,13 @@ jobs:
           args: --all-features
       - name: Run formatter
         run: cargo fmt --all -- --check
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache dependencies
+        uses: Swatinem/rust-cache@v1
+
       - name: Run tests
         run: cargo test --release
-      - name: Build binary
-        run: cargo build --release
