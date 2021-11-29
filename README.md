@@ -9,4 +9,16 @@ Ubuntu用のバッテリ容量を通知してくれるプログラムです。�
 
 ## 使い方
 
-// TODO:
+`$ ./nagamochi`
+
+## 設定
+
+`nagamochi.yml`を以下のいずれの場所に作成してください。
+
+* ~/.config/nagamochi/nagamochi.yml
+* ~/nagamochi.yml
+* ./nagamochi.yml
+
+## nagamochi.yml（設定ファイル）の書き方
+
+[こちらのファイル](./src/tests/configs/general_config.yml)を参照してください。

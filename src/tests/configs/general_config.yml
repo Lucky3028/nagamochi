@@ -1,10 +1,24 @@
+# チェックを行う間隔（秒）
 check_interval: 60
+# 通知を行うケース
 triggers: [
   {
+    # 表示するメッセージ
     message: "qwerty",
+    # バッテリ容量
     percentage: 20,
+    # 通知する条件
+    # バッテリ容量が
+    # Equal: percentageと等しい
+    # Above: percentage以上
+    # Below: percentage以下
     when: "Equal",
+    # (Optional) 通知しない条件（複数選択可）
+    # IsAcOn: ACコネクタが接続されている
+    # IsAcOff: ACコネクタが接続されていない
     suppressors: [],
+    # (Optional) 通知をする際に再生する音声ファイル
+    sound_file: "~/sound.wav"
   },
   {
     message: "qwerty",
@@ -17,6 +31,5 @@ triggers: [
     percentage: 80,
     when: "Below",
     suppressors: [],
-    sound_file: "/"
   }
 ]

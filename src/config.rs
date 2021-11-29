@@ -58,6 +58,7 @@ mod test {
                 Trigger {
                     percentage: 20,
                     when: TriggerType::Equal,
+                    sound_file: Some(PathBuf::from("~/sound.wav")),
                     ..Trigger::default()
                 },
                 Trigger {
@@ -68,7 +69,6 @@ mod test {
                 Trigger {
                     percentage: 80,
                     when: TriggerType::Below,
-                    sound_file: Some(PathBuf::from("/")),
                     ..Trigger::default()
                 },
             ],
