@@ -63,6 +63,13 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
+      - run: mkdir temp
+        with:
+          working-directory: ~/
+      - run: actions/download-artifact@v2
+        with:
+          name: my-artifact
+          path: ~/temp/
       - name: Conventional Changelog Action
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3
