@@ -64,8 +64,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Make directory for download artifact
-        run: mkdir temp
-        working-directory: ~/
+        run: mkdir ~/temp
       - uses: actions/download-artifact@v2
         with:
           name: my-artifact
