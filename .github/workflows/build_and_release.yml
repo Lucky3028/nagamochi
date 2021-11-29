@@ -60,5 +60,14 @@ jobs:
       - build
       - lint
       - test
+    if: github.ref == 'refs/heads/main'
     steps:
-      - run: echo "Unimplemented."
+      - name: Conventional Changelog Action
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          github-token: ${{ secrets.github_token }}
+          version-file: "./Cargo.toml"
+          skip-commit: "true"
+      - run: echo ${{ steps.changelog.outputs.tag }}
+      - run: cat ${{ steps.changelog.outputs.clean_changelog }}
