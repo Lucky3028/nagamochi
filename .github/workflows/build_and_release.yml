@@ -72,4 +72,4 @@ jobs:
           skip-commit: "true"
           version-path: "package.version"
       - run: echo ${{ steps.changelog.outputs.tag }}
-      - run: cat ${{ steps.changelog.outputs.clean_changelog }}
+      - run: cat ./CHANGELOG.md
