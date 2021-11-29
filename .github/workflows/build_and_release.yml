@@ -20,6 +20,11 @@ jobs:
       - name: Build binary
         run: cargo build --release
 
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: ./target/release/nagamochi
+
   lint:
     runs-on: ubuntu-latest
     env:
