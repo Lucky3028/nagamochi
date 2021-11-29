@@ -62,6 +62,7 @@ jobs:
       - test
     if: github.ref == 'refs/heads/main'
     steps:
+      - uses: actions/checkout@v2
       - name: Conventional Changelog Action
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3
