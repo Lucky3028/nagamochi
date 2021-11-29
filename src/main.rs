@@ -16,6 +16,8 @@ fn main() {
 }
 
 fn default_action(_: &Context) {
+    println!("Nagamochi is running!");
+
     loop {
         let config = nagamochi::find_config().unwrap_or_else(|e| {
             eprintln!("{:?}", e);
