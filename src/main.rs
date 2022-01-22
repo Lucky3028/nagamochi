@@ -20,7 +20,7 @@ fn default_action(_: &Context) {
 
     loop {
         let config = nagamochi::find_config().unwrap_or_else(|e| {
-            eprintln!("{:?}", e);
+            eprintln!("Error: Failed to load config: {:?}", e);
             Config::default()
         });
         // TODO: BAT0の場合などにも対応する
@@ -31,12 +31,13 @@ fn default_action(_: &Context) {
             .iter()
             .filter(|trigger| trigger.is_fired(capa))
             .filter(|trigger| {
-                let is_ac =
-                    nagamochi::is_ac_connected(PathBuf::from("/sys/class/power_supply/ACAD"))
-                        .unwrap_or_else(|e| {
-                            eprintln!("{:?}", e);
-                            false
-                        });
+                let is_ac = nagamochi::is_ac_connected(PathBuf::from(
+                    "/sys/class/power_supply/ACAD/online",
+                ))
+                .unwrap_or_else(|e| {
+                    eprintln!("Error: Failed to find AC status: {:?}", e);
+                    false
+                });
                 trigger.suppressors.iter().any(|sup| !sup.is_enabled(is_ac))
             })
             .for_each(|trigger| {
